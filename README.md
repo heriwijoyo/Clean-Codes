@@ -22,9 +22,20 @@ class NetworkServiceFactory {
 
   func authenticatedNetworkService() -> NetworkService? {
     if authNetworkService == nil {
-	    authNetworkService = AuthenticationNetworkService()
+	    authNetworkService = AuthenticatedNetworkService()
     }
     return authNetworkService
   }
 }
 ```
+
+Pros:
++ No overhead of construction unless the object is actually be used -> faster startup time
++ Never return nil
+
+Cons:
++ Hard-coded dependency on `AuthenticatedNetworkService`
++ Mixed construction logic with normal runtime processing -> nil test & its block -> break SRP
+
+Key:
++ Don't let a little convenient idioms break the modularity.
