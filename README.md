@@ -5,11 +5,11 @@
 ## Separate Constructing a System from Using It
 ```swift
 protocol NetworkService {
-  func requestJSONForMethod(method: RequestMethod, URL: String, parameter: RequestParameter?) -> JSON
+  func requestJSONForMethod(method: RequestMethod, URL: String, parameter: RequestParameter?, completion: (JSON->Void))
 }
 
 class AuthenticatedNetworkService: NetworkService {
-  func requestJSONForMethod(method: RequestMethod, URL: String, parameter: RequestParameter?) -> JSON {
+  func requestJSONForMethod(method: RequestMethod, URL: String, parameter: RequestParameter?, completion: (JSON->Void)) {
 
     self.updateHeaderWithToken()
     // detail implementation of network request
